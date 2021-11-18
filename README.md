@@ -1,7 +1,7 @@
 # Atividades da Faculdade
 
 <h1 align="center">
-    <img alt="Layout Website" src="public/images/project.png" width="100%" />
+    <img alt="Layout Website" src="public/project.png" width="100%" />
 </h1>
 
 ## 🚀 O desafio
