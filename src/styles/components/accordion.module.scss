@@ -1,0 +1,112 @@
+.accordion {
+  margin: 12px 0 0 0;
+  max-width: 800px;
+  width: 100%;
+
+  box-shadow: 0 0 0 1px rgba(236, 236, 236, 1);
+  opacity: 1;
+  transition: box-shadow 0.2s, opacity 0.4s;
+
+  &:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.11);
+  }
+
+  .title {
+    max-width: 800px;
+    height: 80px;
+    cursor: pointer;
+    background: var(--white);
+    color: var(--black);
+    display: flex;
+    align-items: center;
+
+  
+    span {
+      font-size: 14px;
+      line-height: 22px;
+
+      &:nth-child(1) {
+        display: inline-block;
+        width: 70%;
+        font-size: 15px;
+        margin: 0 30px;
+        font-weight: 500;
+        color: var(--black);
+      }
+
+      &:nth-child(2) {
+        display: inline-block;
+        width: 20%;
+        color: var(--gray-700);
+      }
+    }
+
+    .active {
+      width: 24px;
+      height: 100%;
+      background-image: url(../../../public/arrow.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: rotate(0);
+      padding: 0 25px;
+
+      &:hover {
+        background-image: url(../../../public/arrowBlue.svg);
+      }
+    }
+
+    .desactive {
+      width: 24px;
+      height: 100%;
+      background-image: url(../../../public/arrow.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: rotate(180deg);
+      padding: 0 25px;
+
+      &:hover {
+        background-image: url(../../../public/arrowBlue.svg);
+      }
+    }
+  }
+
+  .content{
+    background: var(--gray-50);
+    padding: 24px 30px;
+    max-width: 1000px;
+
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 650px) {
+  .accordion .title{
+    span {
+      &:nth-child(1) {
+        width: 55%;
+      }
+
+      &:nth-child(2) {
+        width: 25%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  .accordion .title{
+    span {
+      &:nth-child(1) {
+        width: 40%;
+      }
+
+      &:nth-child(2) {
+        width: 25%;
+      }
+    }
+  }
+}
+
+
