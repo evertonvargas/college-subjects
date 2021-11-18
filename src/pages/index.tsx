@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { supabase } from "../services/supabase";
 
 import styles from "./../styles/home.module.scss"
@@ -47,7 +47,7 @@ const Home = ({subjects, activities}:HomeProps) => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   let { data: subjects } = await supabase.from('Subjects').select('name, id')
   let { data: activities, error } = await supabase.from('Activities').select('deadLine, link, subject_id, description')
   
