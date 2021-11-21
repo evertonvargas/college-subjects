@@ -5,6 +5,7 @@ import styles from "./../styles/home.module.scss"
 
 import { Accordion } from "../components/Accordion";
 import { ToggleCheckbox } from "../components/ToggleCheckbox";
+import { Header } from "../components/Header";
 
 interface Subject{
   name: string;
@@ -30,8 +31,11 @@ const Home = ({subjects, activities}:HomeProps) => {
   }
 
   return (
+    <>
+    <Header />
     <div className={styles.container}>
       {/* <ToggleCheckbox /> */}
+      
       {subjects.map((subject, index) => {
         getActivitiesFromSubject(subject.id);
         return (<Accordion key={index} title={subject.name} activities={getActivitiesFromSubject(subject.id)}/>)
@@ -42,6 +46,7 @@ const Home = ({subjects, activities}:HomeProps) => {
         <p>Éverton Vargas &amp; Luca Rampinelli</p>
       </footer>
     </div>
+    </>
   );
 };
 

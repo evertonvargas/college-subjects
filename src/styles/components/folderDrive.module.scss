@@ -1,0 +1,17 @@
+.container{
+  width: 100px;
+  transition: all .2s;
+
+  &:hover{
+    transform: scale(1.05);
+    transition: all .4s;
+  }
+
+  h2{
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+    text-align: center;
+  }
+}

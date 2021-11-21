@@ -1,0 +1,133 @@
+.container {
+  padding-top: 150px;
+  
+  >div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    background: var(--white);
+    color: var(--black);
+    max-width: 500px;
+    border-radius: 10px;
+    padding: 65px 55px 54px 55px;
+
+    h1 {
+      text-align: center;
+      font-size: 39px;
+      color: #333333;
+      line-height: 1.2;
+      padding-bottom: 49px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      div {
+        position: relative;
+
+        &.username {
+          margin-bottom: 20px;
+        }
+
+        &.password {
+          display: flex;
+          align-items: center;
+
+          img {
+            height: 17px;
+            padding-right: 5px;
+          }
+        }
+
+        &.username,
+        &.password {
+          border-bottom: 2px solid lightgray;
+        }
+
+        &.resetPassword {
+          padding: 8px 0 31px;
+          text-align: right;
+
+          a {
+            font-size: 12px;
+            line-height: 1.7;
+            color: #666666;
+            margin: 0px;
+            transition: all 0.4s;
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            -moz-transition: all 0.4s;
+          }
+        }
+
+        input {
+          outline: none;
+          border: none;
+          width: 100%;
+          height: 40px;
+          color: #a64bf4;
+
+          input::placeholder {
+            color: lightgray;
+          }
+        }
+      }
+
+      label {
+        font-size: 12px;
+        color: #333333;
+        line-height: 1.5;
+      }
+
+      .mainDiv {
+        width: 100%;
+        display: block;
+        position: relative;
+        z-index: 1;
+        border-radius: 25px;
+        overflow: hidden;
+        margin: 0 auto;
+        box-shadow: 0 5px 30px 0 rgb(3 216 222 / 20%);
+
+        div {
+          position: absolute;
+          z-index: -1;
+          width: 300%;
+          height: 100%;
+          background: #a64bf4;
+          background: linear-gradient(
+            to right,
+            #00dbde,
+            #fc00ff,
+            #00dbde,
+            #fc00ff
+          );
+          top: 0;
+          left: -100%;
+          transition: all 0.4s;
+        }
+
+        &:hover div {
+          left: 0%;
+        }
+
+        button {
+          font-size: 16px;
+          color: #fff;
+          line-height: 1.2;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0 20px;
+          width: 100%;
+          height: 50px;
+          outline: none;
+          border: none;
+          background: transparent;
+        }
+      }
+    }
+  }
+}
