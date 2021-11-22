@@ -1,11 +1,12 @@
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
+import { SessionProvider } from "../hooks/useSession";
 
 import "../styles/global.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <SessionProvider>
       <Component {...pageProps} />
       <ToastContainer
         position="top-center"
@@ -18,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         draggable
         pauseOnHover
       />
-    </>
+    </SessionProvider>
   );
 }
 

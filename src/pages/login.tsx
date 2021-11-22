@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { FormEvent } from "react";
 import { supabase } from "../services/supabase";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import { useSession } from "../hooks/useSession";
+import Link from "next/link";
 import * as yup from "yup";
 
 import styles from "./../styles/login.module.scss";
 import "react-toastify/dist/ReactToastify.css";
 
-let schema = yup.object().shape({
+const validationSchema = yup.object().shape({
   email: yup
     .string()
     .email("E-mail inválido.")
@@ -17,28 +19,23 @@ let schema = yup.object().shape({
 });
 
 const MyForm = () => {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const { session, setSessionData } = useSession();
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-
-    schema
-      .validate({
-        email: name,
-        password: password,
-      })
-      .then(async function (valid) {
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik({
+      onSubmit: async ({ email, password }, { resetForm }) => {
         const { user, session, error } = await supabase.auth.signIn({
-          email: name,
-          password: password,
+          email,
+          password,
         });
+
+        setSessionData(session);
 
         if (session) {
           router.push({
-            pathname: "/protected/addTask",
+            pathname: "/addTask",
           });
         } else {
           toast.error("Autenticação falhou", {
@@ -51,47 +48,53 @@ const MyForm = () => {
             progress: undefined,
             theme: "colored",
           });
-        }
-      })
-      .catch(function (err) {
-        toast.error(err.errors[0], {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      });
 
-    setName("");
-    setPassword("");
-  };
+          resetForm();
+        }
+      },
+      validationSchema,
+      initialValues: {
+        email: "",
+        password: "",
+      },
+    });
 
   return (
     <div className={styles.container}>
+      <Link href="/">
+        <a>
+          <img src="/home.svg" alt="logo" />
+        </a>
+      </Link>
       <div>
         <h1>Login</h1>
-        <form onSubmit={handleSubmit} noValidate>
+        <form onSubmit={handleSubmit}>
           <label>Username</label>
           <div className={styles.username}>
             <input
               type="email"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              name="email"
+              id="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Type your username"
             />
           </div>
+          {touched.email && errors.email ? (
+            <div className={styles.error}>{errors.email}</div>
+          ) : null}
 
-          <label>Password</label>
+          <label className={styles.labelPassword}>Password</label>
           <div className={styles.password}>
             <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
               placeholder="Type your password"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              id="password"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
             <img
               src={showPassword ? "/eye.svg" : "/eyeHidden.svg"}
@@ -99,14 +102,13 @@ const MyForm = () => {
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>
-
-          <div className={styles.resetPassword}>
-            <a href="#">Forgot password?</a>
-          </div>
+          {touched.password && errors.password ? (
+            <div className={styles.error}>{errors.password}</div>
+          ) : null}
 
           <div className={styles.mainDiv}>
             <div></div>
-            <button> Login </button>
+            <button type="submit"> Login </button>
           </div>
         </form>
       </div>

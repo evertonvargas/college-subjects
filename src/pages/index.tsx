@@ -1,23 +1,11 @@
 import { GetServerSideProps } from "next";
 import { supabase } from "../services/supabase";
 
-import styles from "./../styles/home.module.scss"
-
 import { Accordion } from "../components/Accordion";
-import { ToggleCheckbox } from "../components/ToggleCheckbox";
 import { Header } from "../components/Header";
+import {Subject, Activitie} from "../types/types"
 
-interface Subject{
-  name: string;
-  id: string;
-}
-
-interface Activitie{
-    deadLine: string;
-    link: string;
-    subject_id: string;
-    description: string;
-}
+import styles from "./../styles/home.module.scss"
 
 interface HomeProps {
   subjects: Subject[];
@@ -38,7 +26,7 @@ const Home = ({subjects, activities}:HomeProps) => {
       
       {subjects.map((subject, index) => {
         getActivitiesFromSubject(subject.id);
-        return (<Accordion key={index} title={subject.name} activities={getActivitiesFromSubject(subject.id)}/>)
+        return (<Accordion key={index} title={subject.name} activities={getActivitiesFromSubject(subject.id)} page={true} />)
       }
       )}
       <footer>

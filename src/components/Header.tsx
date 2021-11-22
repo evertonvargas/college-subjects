@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import styles from "../styles/components/header.module.scss";
+import { ButtonLogin } from "./ButtonLogin";
 
 export const Header = () => {
   return (
@@ -14,14 +15,7 @@ export const Header = () => {
             <a>Arquivos</a>
           </Link>
         </nav>
-        <Link href="/login">
-          <a className={styles.login}>
-            <div className={styles.mainDiv}>
-              <div></div>
-              <button> Login </button>
-            </div>
-          </a>
-        </Link>
+        <ButtonLogin />
       </div>
     </header>
   );

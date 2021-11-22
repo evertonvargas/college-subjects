@@ -1,20 +1,15 @@
 import styles from "../styles/components/accordion.module.scss";
 import { useState } from "react";
 import { Card } from "./Card";
-
-interface Activitie{
-  deadLine: string;
-  link: string;
-  subject_id: string;
-  description: string;
-}
+import { Activitie } from "../types/types"
 
 interface AccordionProps {
   title: string;
   activities: Activitie[] | null;
+  page: boolean;
 }
 
-export const Accordion = ({ title, activities }: AccordionProps) => {
+export const Accordion = ({ title, activities, page }: AccordionProps) => {
   const [activeIndex, setActiveIndex] = useState(false);
 
   return (
@@ -29,7 +24,7 @@ export const Accordion = ({ title, activities }: AccordionProps) => {
         </div>
         {activeIndex && <div className={styles.content}>
           {activities?.map((activity, index) => {
-            return <Card key={index} deadLine={activity.deadLine} link={activity.link} description={activity.description}/>
+            return <Card key={index} deadLine={activity.deadLine} link={activity.link} description={activity.description} page={page}/> 
           })}
         </div>}
       </div>
