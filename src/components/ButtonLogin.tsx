@@ -1,15 +1,21 @@
 import Link from "next/link";
 import { useSession } from "../hooks/useSession";
 import { supabase } from "../services/supabase";
+import { useRouter } from "next/router";
 
 import styles from "../styles/components/buttonLogin.module.scss";
 
 export const ButtonLogin = () => {
+  const router = useRouter();
   const { session, setSessionData } = useSession();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setSessionData(supabase.auth.session());
+
+    router.push({
+      pathname: "/",
+    });
   };
 
   return (

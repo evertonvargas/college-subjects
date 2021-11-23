@@ -8,6 +8,7 @@ export interface Activitie {
   link: string;
   subject_id: string;
   description: string;
+  id: string;
 }
 
 interface AppMetadata {

@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { useSession } from "../hooks/useSession";
-import Link from "next/link";
 import * as yup from "yup";
 
 import styles from "./../styles/login.module.scss";
@@ -19,7 +18,7 @@ const validationSchema = yup.object().shape({
 });
 
 const MyForm = () => {
-  const { session, setSessionData } = useSession();
+  const { setSessionData } = useSession();
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
@@ -61,11 +60,6 @@ const MyForm = () => {
 
   return (
     <div className={styles.container}>
-      <Link href="/">
-        <a>
-          <img src="/home.svg" alt="logo" />
-        </a>
-      </Link>
       <div>
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>

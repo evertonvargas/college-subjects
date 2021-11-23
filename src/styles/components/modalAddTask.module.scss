@@ -1,0 +1,83 @@
+.container{
+  background: #F0F2F5;
+  padding: 10px 20px 30px;
+
+  >div{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+
+    svg{
+      width: 20px;
+      height: 20px;
+      color: #A8A8B3;
+      cursor: pointer;
+
+      &:hover{
+        color: #666;
+      }
+    }
+  }
+  
+  label{
+    display: block;
+    margin-bottom: 5px;
+
+    span{
+      color: red;
+    }
+  }
+
+  input, textarea{
+    margin-bottom: 2rem;
+
+    &::placeholder{
+      color: #969CB2;
+    }
+  }
+
+  input{
+    width: 100%;
+    outline: none;
+    border: 1px solid #D7D7D7;
+    height: 40px;
+    padding: 3px 3px 3px 10px;
+    color: #969CB2;
+  }
+
+  textarea{
+    width: 100%;
+    outline: none;
+    border: 1px solid #D7D7D7;
+    height: 100px;
+    padding: 5px 3px 3px 10px;
+    color: #969CB2;
+  }
+
+  select{
+    width: 100%;
+    outline: none;
+    border: 1px solid #D7D7D7;
+    height: 40px;
+    padding: 3px 3px 3px 10px;
+    margin-bottom: 10px;
+    color: #969CB2;
+    scroll-behavior: smooth;
+  }
+
+  button{
+    border: 1px solid #D7D7D7;
+    outline: none;
+    background: #33CC95;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--white);
+    border-radius: 5px;
+    margin-top: 1rem;
+
+    &:hover{
+      filter: brightness(0.95);
+    }
+  }
+}

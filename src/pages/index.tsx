@@ -4,8 +4,10 @@ import { supabase } from "../services/supabase";
 import { Accordion } from "../components/Accordion";
 import { Header } from "../components/Header";
 import {Subject, Activitie} from "../types/types"
+import { useActivities } from "../hooks/useActivities";
 
 import styles from "./../styles/home.module.scss"
+import { useEffect } from "react";
 
 interface HomeProps {
   subjects: Subject[];
@@ -13,10 +15,16 @@ interface HomeProps {
 }
 
 const Home = ({subjects, activities}:HomeProps) => {
+  const { setSubjects, setActivities} = useActivities();
 
   function getActivitiesFromSubject(id: string){
     return activities.filter(activity => activity.subject_id === id);
   }
+
+  useEffect (() => {
+    setSubjects(subjects);
+    setActivities(activities);
+  } , []);
 
   return (
     <>

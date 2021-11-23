@@ -24,7 +24,7 @@ export const Accordion = ({ title, activities, page }: AccordionProps) => {
         </div>
         {activeIndex && <div className={styles.content}>
           {activities?.map((activity, index) => {
-            return <Card key={index} deadLine={activity.deadLine} link={activity.link} description={activity.description} page={page}/> 
+            return <Card key={index} id={activity.id} deadLine={activity.deadLine} link={activity.link} description={activity.description} page={page}/> 
           })}
         </div>}
       </div>

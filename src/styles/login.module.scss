@@ -1,22 +1,5 @@
 .container {
   padding-top: 150px;
-
-  a{
-    position: absolute;
-    background: var(--white);
-    border-radius: 50%;
-    top: 10px;
-    left: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3px;
-
-    img{
-      width: 32px;
-      height: 32px;
-    }
-  }
   
   >div {
     display: flex;
