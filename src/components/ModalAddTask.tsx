@@ -14,7 +14,7 @@ export const ModalAddTask = ({
   modalOpen,
   setModalOpen,
 }: ModalAddFoodProps) => {
-  const {subjects, setActivitiesData} = useActivities();
+  const {subjects, registerTask} = useActivities();
   const [link, setLink] = useState("");
   const [date, setDate] = useState("");
   const [textArea, setTextArea] = useState("");
@@ -22,7 +22,7 @@ export const ModalAddTask = ({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setActivitiesData({date, link, textArea, subject});
+    registerTask({date, link, textArea, subject});
     setModalOpen();
     setLink("");
     setDate("");

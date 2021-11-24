@@ -1,4 +1,10 @@
-import { createContext, useContext, ReactNode, useState } from "react";
+import {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useEffect,
+} from "react";
 import { supabase } from "../services/supabase";
 import { Activitie, Subject } from "../types/types";
 
@@ -14,11 +20,11 @@ interface FormData {
 }
 
 interface ActivitiesContextData {
-  activities: Activitie[];
+  activitiesData: Activitie[];
   subjects: Subject[];
-  setActivitiesData: ({ date, textArea, link }: FormData) => void;
+  registerTask: ({ date, textArea, link }: FormData) => void;
   setSubjects: (subjects: Subject[]) => void;
-  setActivities: (activities: Activitie[]) => void;
+  setActivitiesData: (activities: Activitie[]) => void;
 }
 
 const ActivitiesContext = createContext<ActivitiesContextData>(
@@ -26,15 +32,10 @@ const ActivitiesContext = createContext<ActivitiesContextData>(
 );
 
 export function ActivitiesProvider({ children }: ActivitieProviderProps) {
-  const [activities, setActivities] = useState<Activitie[]>([]);
+  const [activitiesData, setActivitiesData] = useState<Activitie[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
 
-  const setActivitiesData = async ({
-    date,
-    textArea,
-    link,
-    subject,
-  }: FormData) => {
+  const registerTask = async ({ date, textArea, link, subject }: FormData) => {
     console.log("aqui");
     console.log(date, link, textArea, subject);
     const { data, error } = await supabase.from("Activities").insert([
@@ -46,11 +47,8 @@ export function ActivitiesProvider({ children }: ActivitieProviderProps) {
       },
     ]);
 
-    console.log(data);
-    console.log(typeof data);
-    
     if (data) {
-      setActivities((oldvalue) => [
+      setActivitiesData((oldvalue) => [
         ...oldvalue,
         {
           deadLine: data[0].deadLine,
@@ -66,11 +64,11 @@ export function ActivitiesProvider({ children }: ActivitieProviderProps) {
   return (
     <ActivitiesContext.Provider
       value={{
-        activities,
+        activitiesData,
         setActivitiesData,
         subjects,
         setSubjects,
-        setActivities,
+        registerTask,
       }}
     >
       {children}

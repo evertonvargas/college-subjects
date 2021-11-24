@@ -1,30 +1,36 @@
 import { GetServerSideProps } from "next";
 import { supabase } from "../services/supabase";
+import {Subject, Activitie} from "../types/types"
 
 import { Accordion } from "../components/Accordion";
 import { Header } from "../components/Header";
-import {Subject, Activitie} from "../types/types"
 import { useActivities } from "../hooks/useActivities";
 
 import styles from "./../styles/home.module.scss"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface HomeProps {
-  subjects: Subject[];
-  activities: Activitie[];
+  subjectsSSR: Subject[];
+  activitiesSSR: Activitie[];
 }
 
-const Home = ({subjects, activities}:HomeProps) => {
-  const { setSubjects, setActivities} = useActivities();
+const Home = ({subjectsSSR, activitiesSSR}:HomeProps) => {
+
+  const { activitiesData, subjects, setActivitiesData, setSubjects} = useActivities();
+  const [activities, setActivities] = useState(activitiesData);
 
   function getActivitiesFromSubject(id: string){
     return activities.filter(activity => activity.subject_id === id);
   }
 
-  useEffect (() => {
-    setSubjects(subjects);
-    setActivities(activities);
-  } , []);
+  useEffect(() => {
+    setActivitiesData(activitiesSSR);
+    setSubjects(subjectsSSR);
+  },[])
+
+  useEffect(() => {
+    setActivities(activitiesData);
+  }, [activitiesData]);
 
   return (
     <>
@@ -49,16 +55,15 @@ const Home = ({subjects, activities}:HomeProps) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let { data: subjects } = await supabase.from('Subjects').select('name, id')
-  let { data: activities, error } = await supabase.from('Activities').select('deadLine, link, subject_id, description')
+  let { data: subjectsSSR } = await supabase.from('Subjects').select('name, id')
+  let { data: activitiesSSR, error } = await supabase.from('Activities').select('deadLine, link, subject_id, description')
   
   return {
     props: {
-      subjects,
-      activities
+      subjectsSSR,
+      activitiesSSR
     },
   };
 }
-
 
 

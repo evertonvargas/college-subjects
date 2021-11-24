@@ -1,25 +1,27 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { supabase } from "../services/supabase";
 import Head from "next/head";
-import { GetServerSideProps } from "next";
 import { Accordion } from "../components/Accordion";
 import styles from "../styles/addTask.module.scss";
 import { Header } from "../components/Header";
-import { Subject, Activitie } from "../types/types";
 import { useSession } from "../hooks/useSession";
 import { FiPlusSquare } from "react-icons/fi";
 import { ModalAddTask } from "../components/ModalAddTask";
 import { useActivities } from "../hooks/useActivities";
 
+import { GetServerSideProps } from "next";
+import { supabase } from "../services/supabase";
+import {Subject, Activitie} from "../types/types"
+
 interface ProtectedSSRouteProps {
-  subjects: Subject[];
-  activities: Activitie[];
+  subjectsSSR: Subject[];
+  activitiesSSR: Activitie[];
 }
 
-const ProtectedSSRoute = ({ subjects, activities }: ProtectedSSRouteProps) => {
+const ProtectedSSRoute = ({ subjectsSSR, activitiesSSR }: ProtectedSSRouteProps) => {
   const router = useRouter();
-  const { setSubjects, setActivities} = useActivities();
+  const { setSubjects, setActivitiesData, activitiesData, subjects} = useActivities();
+  const [activities, setActivities] = useState(activitiesData);
   const { session } = useSession();
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -28,8 +30,8 @@ const ProtectedSSRoute = ({ subjects, activities }: ProtectedSSRouteProps) => {
   }
 
   useEffect(() => {
-    setSubjects(subjects);
-    setActivities(activities);
+    setActivitiesData(activitiesSSR);
+    setSubjects(subjectsSSR);
 
     if (!session) {
       router.push({
@@ -37,6 +39,10 @@ const ProtectedSSRoute = ({ subjects, activities }: ProtectedSSRouteProps) => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    setActivities(activitiesData);
+  }, [activitiesData]);
 
   function getActivitiesFromSubject(id: string) {
     return activities.filter((activity) => activity.subject_id === id);
@@ -82,15 +88,15 @@ const ProtectedSSRoute = ({ subjects, activities }: ProtectedSSRouteProps) => {
 export default ProtectedSSRoute;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let { data: subjects } = await supabase.from("Subjects").select("name, id");
-  let { data: activities, error } = await supabase
+  let { data: subjectsSSR } = await supabase.from("Subjects").select("name, id");
+  let { data: activitiesSSR } = await supabase
     .from("Activities")
     .select("deadLine, link, subject_id, description, id");
 
   return {
     props: {
-      subjects,
-      activities,
+      subjectsSSR,
+      activitiesSSR,
     },
   };
 };
