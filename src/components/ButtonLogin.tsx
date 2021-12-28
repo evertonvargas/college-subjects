@@ -1,7 +1,8 @@
+import { useRouter } from "next/router";
 import Link from "next/link";
+
 import { useSession } from "../hooks/useSession";
 import { supabase } from "../services/supabase";
-import { useRouter } from "next/router";
 
 import styles from "../styles/components/buttonLogin.module.scss";
 

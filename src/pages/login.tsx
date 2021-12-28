@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { supabase } from "../services/supabase";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
-import { useSession } from "../hooks/useSession";
 import * as yup from "yup";
+
+import { supabase } from "../services/supabase";
+import { useSession } from "../hooks/useSession";
 
 import styles from "./../styles/login.module.scss";
 import "react-toastify/dist/ReactToastify.css";

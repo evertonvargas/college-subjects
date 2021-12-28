@@ -1,13 +1,14 @@
 import { GetServerSideProps } from "next";
-import { supabase } from "../services/supabase";
-import {Subject, Activitie} from "../types/types"
+import { useEffect, useState } from "react";
 
 import { Accordion } from "../components/Accordion";
+import { supabase } from "../services/supabase";
 import { Header } from "../components/Header";
+import {Subject, Activitie} from "../types/types"
 import { useActivities } from "../hooks/useActivities";
 
 import styles from "./../styles/home.module.scss"
-import { useEffect, useState } from "react";
+
 
 interface HomeProps {
   subjectsSSR: Subject[];

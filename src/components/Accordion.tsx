@@ -1,7 +1,9 @@
-import styles from "../styles/components/accordion.module.scss";
 import { useState } from "react";
-import { Card } from "./Card";
+
 import { Activitie } from "../types/types"
+import { Card } from "./Card";
+
+import styles from "../styles/components/accordion.module.scss";
 
 interface AccordionProps {
   title: string;

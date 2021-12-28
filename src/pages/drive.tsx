@@ -1,8 +1,10 @@
-import { FolderDrive } from "../components/FolderDrive";
-import { Header } from "../components/Header";
-import styles from "./../styles/drive.module.scss";
 import { GetServerSideProps } from "next";
+
+import { FolderDrive } from "../components/FolderDrive";
 import { supabase } from "../services/supabase";
+import { Header } from "../components/Header";
+
+import styles from "./../styles/drive.module.scss";
 
 interface Subject {
   initials: string;
@@ -28,7 +30,7 @@ const Drive = ({ subjects }: HomeProps) => {
 export default Drive;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let { data: subjects } = await supabase.from("Subjects").select("initials, class_link").neq("class_link", null);
+  let { data: subjects } = await supabase.from("Subjects").select("initials, driveLink").neq("driveLink", null);
 
   return {
     props: {

@@ -1,7 +1,8 @@
 import Link from "next/link";
 
-import styles from "../styles/components/header.module.scss";
 import { ButtonLogin } from "./ButtonLogin";
+
+import styles from "../styles/components/header.module.scss";
 
 export const Header = () => {
   return (

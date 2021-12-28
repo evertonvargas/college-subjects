@@ -1,5 +1,6 @@
-import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
+import type { AppProps } from "next/app";
+
 import { SessionProvider } from "../hooks/useSession";
 import { ActivitiesProvider } from "../hooks/useActivities";
 

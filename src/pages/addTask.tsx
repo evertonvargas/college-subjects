@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import Head from "next/head";
-import { Accordion } from "../components/Accordion";
-import styles from "../styles/addTask.module.scss";
-import { Header } from "../components/Header";
-import { useSession } from "../hooks/useSession";
-import { FiPlusSquare } from "react-icons/fi";
-import { ModalAddTask } from "../components/ModalAddTask";
-import { useActivities } from "../hooks/useActivities";
-
+import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
+import { useEffect, useState } from "react";
+import { FiPlusSquare } from "react-icons/fi";
+
+import { ModalAddTask } from "../components/ModalAddTask";
+import { Accordion } from "../components/Accordion";
+import { Header } from "../components/Header";
 import { supabase } from "../services/supabase";
+import { useSession } from "../hooks/useSession";
+import { useActivities } from "../hooks/useActivities";
 import {Subject, Activitie} from "../types/types"
+
+import styles from "../styles/addTask.module.scss";
 
 interface ProtectedSSRouteProps {
   subjectsSSR: Subject[];

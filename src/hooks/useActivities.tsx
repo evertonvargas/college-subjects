@@ -1,12 +1,7 @@
-import {
-  createContext,
-  useContext,
-  ReactNode,
-  useState,
-  useEffect,
-} from "react";
-import { supabase } from "../services/supabase";
+import { createContext,useContext,ReactNode,useState } from "react";
+
 import { Activitie, Subject } from "../types/types";
+import { supabase } from "../services/supabase";
 
 interface ActivitieProviderProps {
   children: ReactNode;

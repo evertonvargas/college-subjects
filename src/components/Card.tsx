@@ -1,7 +1,8 @@
 import { format } from 'date-fns';
-import { Activitie } from "../types/types";
-import { supabase } from "../services/supabase";
+
 import { useActivities } from "../hooks/useActivities";
+import { supabase } from "../services/supabase";
+import { Activitie } from "../types/types";
 
 import styles from "./../styles/components/card.module.scss";
 
@@ -48,7 +49,7 @@ export const Card = ({ deadLine, link, description, page, id }: CardProps) => {
         </div>
       )}
       <p>{description}</p>
-      <a href={link}>Link Arquivo</a>
+      {link && <a href={link}>Link Arquivo</a>}
     </div>
   );
 };

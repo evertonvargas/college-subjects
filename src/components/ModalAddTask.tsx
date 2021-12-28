@@ -1,9 +1,10 @@
-import { Modal } from "./Modal";
+import { FormEvent, useState } from "react";
 import { MdClose } from "react-icons/md";
+
+import { Modal } from "./Modal";
 import { useActivities } from "../hooks/useActivities";
 
 import styles from "../styles/components/modalAddTask.module.scss";
-import { FormEvent, useState } from "react";
 
 interface ModalAddFoodProps {
   modalOpen: boolean;
